@@ -1,26 +1,33 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+@layer base {
+  a,
+  area,
+  button,
+  [role="button"],
+  input,
+  label,
+  select,
+  summary,
+  textarea {
+    touch-action: manipulation;
+  }
 
-* {
-  box-sizing: border-box;
-}
-
-@media (prefers-color-scheme: dark) {
   html {
-    color-scheme: dark;
+    -webkit-tap-highlight-color: transparent;
   }
-  body {
-    color: white;
-    background: black;
+
+  button {
+    @apply focus:outline-none;
   }
+
+  input {
+    @apply focus:shadow-none focus:outline-none;
+  }
+}
+
+.table-departure-arrival tr:last-child td {
+  @apply !border-b-0;
 }
