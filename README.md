@@ -1,8 +1,16 @@
-# KTM Schedule
+<p align="center">
+  <img src="https://ktm-schedule.vercel.app/ktm-schedule.png" alt="KTM Schedule">
+</p>
 
-KTM Berhad Malaysia train schedule. In tables and routes view.
+<p align="center">
+  KTM Berhad Malaysia train schedule. In tables and routes view.
+<p>
 
-[Go to website](https://ktm-schedule.vercel.app)  
+<p align="center">
+  <a href="https://ktm-schedule.vercel.app"><strong>Browse Website</strong></a>
+</p>
+
+## About KTM Schedule
 
 Last updated: <strong>22 August 2022</strong>
 
