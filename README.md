@@ -45,5 +45,6 @@ df.to_json(r'./' + name + '.json')
 ## Tech stack used
 
 - Next JS
+- Python
 - TypeScript
 - Tailwind
