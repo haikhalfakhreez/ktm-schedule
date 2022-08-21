@@ -9,35 +9,37 @@ export default function Table({ jsonData }: { jsonData: JsonData }) {
   const dataKeysLength = Object.keys(data).length
 
   return (
-    <div className="overflow-hidden shadow ring-1 ring-gray-200 rounded overflow-x-auto scrollbar-hide">
-      <table className="min-w-full border-separate" style={{ borderSpacing: 0 }}>
-        <thead>
-          <tr>
-            <Th sticky className="bg-gray-100 text-left">
-              Train 🚄
-            </Th>
-            {Object.keys(data).map((item, index) => (
-              <Th key={index} showBorderRight={index !== dataKeysLength - 1}>
-                {item}
+    <div className="overflow-hidden shadow ring-1 ring-gray-200 rounded">
+      <div className="overflow-x-auto scrollbar-hide">
+        <table className="min-w-full border-separate" style={{ borderSpacing: 0 }}>
+          <thead>
+            <tr>
+              <Th sticky className="bg-gray-100 text-left">
+                Train 🚄
               </Th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {Object.entries(train).map((_, _index) => (
-            <tr key={_index}>
-              <Td sticky className="bg-gray-100 text-left" showBorderBottom={_index !== trainKeysLength - 1}>
-                {train[_index]}
-              </Td>
-              {Object.entries(data).map(([key, value], index) => (
-                <Td key={index} showBorderRight={index !== dataKeysLength - 1} showBorderBottom={_index !== trainKeysLength - 1}>
-                  {value[_index]}
-                </Td>
+              {Object.keys(data).map((item, index) => (
+                <Th key={index} showBorderRight={index !== dataKeysLength - 1}>
+                  {item}
+                </Th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {Object.entries(train).map((_, _index) => (
+              <tr key={_index}>
+                <Td sticky className="bg-gray-100 text-left" showBorderBottom={_index !== trainKeysLength - 1}>
+                  {train[_index]}
+                </Td>
+                {Object.entries(data).map(([key, value], index) => (
+                  <Td key={index} showBorderRight={index !== dataKeysLength - 1} showBorderBottom={_index !== trainKeysLength - 1}>
+                    {value[_index]}
+                  </Td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
