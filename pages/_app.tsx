@@ -7,7 +7,7 @@ import Footer from 'components/footer'
 import { TableProvider } from 'context/table'
 import { useRouter } from 'next/router'
 
-export const WEBSITE_TITLE: string = `KTM Schedule | Haikhal Fakhreez`
+export const WEBSITE_TITLE: string = `KTM Schedule`
 export const WEBSITE_DESCRIPTION: string = `KTM Berhad Malaysia train schedule`
 export const WEBSITE_URL: string = `https://ktm-schedule.vercel.app`
 export const WEBSITE_IMAGE: string = `${WEBSITE_URL}/ktm-schedule.png`
