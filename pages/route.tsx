@@ -3,6 +3,8 @@ import { twMerge } from 'tailwind-merge'
 import { destinationsA, destinationsB, getDestinationTime } from 'lib/route'
 import type { JsonData, DestinationsName, WeekType } from 'types'
 import { addZeroToHour } from 'lib/utils'
+import { useTableContext } from 'context/table'
+import LastUpdated from 'components/last-updated'
 
 import batuCavesWdData from 'lib/batu-caves-wd.json'
 import batuCavesWkData from 'lib/batu-caves-wk.json'
@@ -72,6 +74,16 @@ export default function TableIndex() {
     }
   }, [from, to, route])
 
+  /**
+   * Set route, weektype, and direction based on table context.
+   */
+  const { table } = useTableContext()
+
+  React.useEffect(() => {
+    setDestination(table.destination)
+    setWeek(table.weekType)
+  }, [table])
+
   function reset() {
     setFrom('')
     setTo('')
@@ -139,35 +151,42 @@ export default function TableIndex() {
         {/* Show route data */}
         <section>
           <RouteTitle>Route data 📊</RouteTitle>
+
           {timeFrom && timeTo ? (
-            <div className="shadow ring-1 ring-gray-200 rounded max-h-[500px] overflow-y-auto scrollbar-hide">
-              <table className="border-separate table-fixed w-full text-center table-departure-arrival" style={{ borderSpacing: 0 }}>
-                <thead>
-                  <tr className="divide-x divide-gray-200">
-                    <th scope="col" className="bg-gray-50 sticky top-0 border-b border-gray-200 px-3 py-3 text-sm font-semibold text-gray-900">
-                      Departure
-                    </th>
-                    <th scope="col" className="bg-gray-50 sticky top-0 border-b border-gray-200 px-3 py-3 text-sm font-semibold text-gray-900">
-                      Arrival
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {timeFrom.map((_, index) =>
-                    timeFrom[index] && timeTo[index] ? (
-                      <tr key={index} className="divide-x divide-gray-200">
-                        <td className="bg-white border-b border-gray-200 whitespace-nowrap px-3 py-2.5 text-sm text-gray-500">
-                          {addZeroToHour(timeFrom[index] as string)}
-                        </td>
-                        <td className="bg-white border-b border-gray-200 whitespace-nowrap px-3 py-2.5 text-sm text-gray-500">
-                          {addZeroToHour(timeTo[index] as string)}
-                        </td>
-                      </tr>
-                    ) : null
-                  )}
-                </tbody>
-              </table>
-            </div>
+            <>
+              {/* Last updated */}
+              <LastUpdated>{table.lastUpdated}</LastUpdated>
+
+              {/* Data table */}
+              <div className="shadow ring-1 ring-gray-200 rounded max-h-[500px] overflow-y-auto scrollbar-hide">
+                <table className="border-separate table-fixed w-full text-center table-departure-arrival" style={{ borderSpacing: 0 }}>
+                  <thead>
+                    <tr className="divide-x divide-gray-200">
+                      <th scope="col" className="bg-gray-50 sticky top-0 border-b border-gray-200 px-3 py-3 text-sm font-semibold text-gray-900">
+                        Departure
+                      </th>
+                      <th scope="col" className="bg-gray-50 sticky top-0 border-b border-gray-200 px-3 py-3 text-sm font-semibold text-gray-900">
+                        Arrival
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {timeFrom.map((_, index) =>
+                      timeFrom[index] && timeTo[index] ? (
+                        <tr key={index} className="divide-x divide-gray-200">
+                          <td className="bg-white border-b border-gray-200 whitespace-nowrap px-3 py-2.5 text-sm text-gray-500">
+                            {addZeroToHour(timeFrom[index] as string)}
+                          </td>
+                          <td className="bg-white border-b border-gray-200 whitespace-nowrap px-3 py-2.5 text-sm text-gray-500">
+                            {addZeroToHour(timeTo[index] as string)}
+                          </td>
+                        </tr>
+                      ) : null
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </>
           ) : (
             <div className="py-20 text-center space-y-1">
               <div className="font-semibold">No data 🤷</div>
