@@ -42,7 +42,7 @@ export default function Navbar() {
 
       {/* Mobile navigation */}
       {pathname !== '/' ? (
-        <SectionLayout>
+        <SectionLayout className="md:hidden">
           <div className="py-3 border-t md:border-t-0 border-slate-100 w-full">
             <MobileBreadcrumbs />
           </div>
