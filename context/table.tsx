@@ -101,7 +101,7 @@ type TableData = {
   [key in TableDataKey]: JsonData
 }
 
-const TABLE_DATA: TableData = {
+export const TABLE_DATA: TableData = {
   'bc-wd': batuCavesWdData as JsonData,
   'bc-wk': batuCavesWkData as JsonData,
   'ps-wd': pulauSebangWdData as JsonData,

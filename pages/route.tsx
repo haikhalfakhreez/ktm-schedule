@@ -18,6 +18,8 @@ import tgMalimWkData from 'lib/tg-malim-wk.json'
 type TimeFromTo = (string | null)[] | null
 
 export default function TableIndex() {
+  const { table } = useTableContext()
+
   const [from, setFrom] = React.useState<DestinationsName | ''>('')
   const [to, setTo] = React.useState<DestinationsName | ''>('')
   const [timeFrom, setTimeFrom] = React.useState<TimeFromTo>(null)
@@ -77,8 +79,6 @@ export default function TableIndex() {
   /**
    * Set route, weektype, and direction based on table context.
    */
-  const { table } = useTableContext()
-
   React.useEffect(() => {
     setDestination(table.destination)
     setWeek(table.weekType)
