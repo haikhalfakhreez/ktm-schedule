@@ -3,10 +3,23 @@ import { twMerge } from 'tailwind-merge'
 import type { JsonData } from 'types'
 
 export default function Table({ jsonData }: { jsonData: JsonData }) {
+  const rowsRef = React.useRef<Array<HTMLDivElement | null>>([])
   const { train, data } = jsonData
 
   const trainKeysLength = Object.keys(train).length
   const dataKeysLength = Object.keys(data).length
+
+  /** Remove highlight on table everytime component re-renders. */
+  function removeHighlight() {
+    rowsRef.current.forEach((row) => {
+      if (row) row.className = ''
+    })
+  }
+
+  React.useEffect(() => {
+    rowsRef.current = rowsRef.current.slice(0, Object.keys(train).length)
+    removeHighlight()
+  }, [train])
 
   return (
     <div className="overflow-hidden shadow ring-1 ring-slate-200 rounded">
@@ -26,7 +39,7 @@ export default function Table({ jsonData }: { jsonData: JsonData }) {
           </thead>
           <tbody>
             {Object.entries(train).map((_, _index) => (
-              <tr key={_index} onClick={highlightRow}>
+              <tr key={_index} onClick={highlightRow} ref={(el) => (rowsRef.current[_index] = el)}>
                 <Td sticky className="bg-slate-100 text-left" showBorderBottom={_index !== trainKeysLength - 1}>
                   {train[_index]}
                 </Td>

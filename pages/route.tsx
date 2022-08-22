@@ -91,6 +91,24 @@ export default function TableIndex() {
     setTimeTo(null)
   }
 
+  /**
+   * Remove highlight on table everytime component re-renders.
+   */
+  const rowsRef = React.useRef<Array<HTMLDivElement | null>>([])
+
+  function removeHighlight() {
+    rowsRef.current.forEach((row) => {
+      if (row) row.className = 'divide-x divide-slate-200'
+    })
+  }
+
+  React.useEffect(() => {
+    if (timeFrom && timeTo) {
+      rowsRef.current = rowsRef.current.slice(0, timeFrom.length)
+      removeHighlight()
+    }
+  }, [timeFrom, timeTo])
+
   return (
     <div className="max-w-screen-sm mx-auto">
       <h2 className="text-3xl font-bold text-primary">Route</h2>
@@ -174,7 +192,7 @@ export default function TableIndex() {
                     <tbody>
                       {timeFrom.map((_, index) =>
                         timeFrom[index] && timeTo[index] ? (
-                          <tr key={index} className="divide-x divide-slate-200" onClick={highlightRow}>
+                          <tr key={index} className="divide-x divide-slate-200" onClick={highlightRow} ref={(el) => (rowsRef.current[index] = el)}>
                             <td className="bg-white border-b border-slate-200 whitespace-nowrap px-3 py-2.5 text-sm text-slate-500">
                               {addZeroToHour(timeFrom[index] as string)}
                             </td>
