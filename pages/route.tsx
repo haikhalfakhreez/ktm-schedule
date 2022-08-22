@@ -158,15 +158,15 @@ export default function TableIndex() {
               <LastUpdated>{table.lastUpdated}</LastUpdated>
 
               {/* Data table */}
-              <div className="shadow ring-1 ring-gray-200 rounded overflow-hidden">
+              <div className="shadow ring-1 ring-slate-200 rounded overflow-hidden">
                 <div className="max-h-[500px] overflow-y-auto scrollbar-hide">
                   <table className="border-separate table-fixed w-full text-center table-departure-arrival" style={{ borderSpacing: 0 }}>
                     <thead>
-                      <tr className="divide-x divide-gray-200">
-                        <th scope="col" className="bg-gray-50 sticky top-0 border-b border-gray-200 px-3 py-3 text-sm font-semibold text-gray-900">
+                      <tr className="divide-x divide-slate-200">
+                        <th scope="col" className="bg-slate-50 sticky top-0 border-b border-slate-200 px-3 py-3 text-sm font-semibold text-primary">
                           Departure
                         </th>
-                        <th scope="col" className="bg-gray-50 sticky top-0 border-b border-gray-200 px-3 py-3 text-sm font-semibold text-gray-900">
+                        <th scope="col" className="bg-slate-50 sticky top-0 border-b border-slate-200 px-3 py-3 text-sm font-semibold text-primary">
                           Arrival
                         </th>
                       </tr>
@@ -174,11 +174,11 @@ export default function TableIndex() {
                     <tbody>
                       {timeFrom.map((_, index) =>
                         timeFrom[index] && timeTo[index] ? (
-                          <tr key={index} className="divide-x divide-gray-200">
-                            <td className="bg-white border-b border-gray-200 whitespace-nowrap px-3 py-2.5 text-sm text-gray-500">
+                          <tr key={index} className="divide-x divide-slate-200" onClick={highlightRow}>
+                            <td className="bg-white border-b border-slate-200 whitespace-nowrap px-3 py-2.5 text-sm text-slate-500">
                               {addZeroToHour(timeFrom[index] as string)}
                             </td>
-                            <td className="bg-white border-b border-gray-200 whitespace-nowrap px-3 py-2.5 text-sm text-gray-500">
+                            <td className="bg-white border-b border-slate-200 whitespace-nowrap px-3 py-2.5 text-sm text-slate-500">
                               {addZeroToHour(timeTo[index] as string)}
                             </td>
                           </tr>
@@ -202,6 +202,11 @@ export default function TableIndex() {
       </div>
     </div>
   )
+}
+
+function highlightRow(e: React.MouseEvent<HTMLTableRowElement>) {
+  const target = e.currentTarget as HTMLTableRowElement
+  target.classList.toggle('route-highlight-row')
 }
 
 type RouteTitleProps = {

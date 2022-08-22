@@ -31,3 +31,11 @@
 .table-departure-arrival tr:last-child td {
   @apply !border-b-0;
 }
+
+.table-highlight-row td, .route-highlight-row td {
+  @apply !bg-indigo-300/10 !text-primary;
+}
+
+.table-highlight-row td:first-child {
+  @apply !bg-indigo-50;
+}
