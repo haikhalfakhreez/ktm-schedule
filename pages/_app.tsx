@@ -9,10 +9,10 @@ import { useRouter } from 'next/router'
 
 export const WEBSITE_TITLE: string = `KTM Schedule`
 export const WEBSITE_DESCRIPTION: string = `KTM Berhad Malaysia train schedule`
-export const WEBSITE_URL: string = `https://ktm-schedule.vercel.app`
+export const WEBSITE_URL: string = `https://ktm-schedule.haikhalfakhreez.com`
 export const WEBSITE_IMAGE: string = `${WEBSITE_URL}/ktm-schedule.png`
 
-function MyApp({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
   return (
@@ -50,5 +50,3 @@ function MyApp({ Component, pageProps }: AppProps) {
     </>
   )
 }
-
-export default MyApp
