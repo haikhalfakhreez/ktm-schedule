@@ -5,6 +5,7 @@ import type { JsonData, DestinationsName, WeekType } from 'types'
 import { addZeroToHour } from 'lib/utils'
 import { useTableContext } from 'context/table'
 import LastUpdated from 'components/last-updated'
+import { Head } from 'components/head'
 
 import batuCavesWdData from 'lib/batu-caves-wd.json'
 import batuCavesWkData from 'lib/batu-caves-wk.json'
@@ -110,115 +111,119 @@ export default function TableIndex() {
   }, [timeFrom, timeTo])
 
   return (
-    <div className="max-w-screen-sm mx-auto">
-      <h2 className="text-3xl font-bold text-primary">Route</h2>
+    <>
+      <Head title="Route | KTM Schedule" description="Customise and see KTM Scehdule based on your destination." />
 
-      <div className="space-y-6 mt-4">
-        {/* Select route */}
-        <section>
-          <RouteTitle>Select route 🛤️</RouteTitle>
-          <div className="flex items-center space-x-4">
-            <RouteButton onClick={() => setDestination('A')} active={destination === 'A'}>
-              Batu Caves - Pulau Sebang
-            </RouteButton>
-            <RouteButton onClick={() => setDestination('B')} active={destination === 'B'}>
-              Tg Malim - Klang
-            </RouteButton>
-          </div>
-        </section>
+      <div className="max-w-screen-sm mx-auto">
+        <h2 className="text-3xl font-bold text-primary">Route</h2>
 
-        {/* Select weekday or weekend */}
-        <section>
-          <RouteTitle>Select week type 📅</RouteTitle>
-          <div className="flex items-center space-x-4">
-            <RouteButton className="py-2.5" onClick={() => setWeek('weekday')} active={week === 'weekday'}>
-              Weekday
-            </RouteButton>
-            <RouteButton className="py-2.5" onClick={() => setWeek('weekend')} active={week === 'weekend'}>
-              Weekend
-            </RouteButton>
-          </div>
-        </section>
-
-        {/* Select destination */}
-        <section>
-          <RouteTitle>Choose destination 🎯</RouteTitle>
-          <div className="flex flex-col">
-            <DestinationInput
-              name="from"
-              placeholder="From"
-              options={sortedOptions}
-              value={from}
-              disabledOption={to}
-              onChange={(e) => setFrom(e.target.value as DestinationsName)}
-            />
-
-            <div className="my-2 text-xs text-tertiary text-center">towards ⬇️</div>
-
-            <DestinationInput
-              name="to"
-              placeholder="To"
-              options={sortedOptions}
-              value={to}
-              disabledOption={from}
-              onChange={(e) => setTo(e.target.value as DestinationsName)}
-            />
-          </div>
-        </section>
-
-        {/* Show route data */}
-        <section>
-          <RouteTitle>Route data 📊</RouteTitle>
-
-          {timeFrom && timeTo ? (
-            <>
-              {/* Last updated */}
-              <LastUpdated>{table.lastUpdated}</LastUpdated>
-
-              {/* Data table */}
-              <div className="shadow ring-1 ring-slate-200 rounded overflow-hidden">
-                <div className="max-h-[500px] overflow-y-auto scrollbar-hide">
-                  <table className="border-separate table-fixed w-full text-center table-departure-arrival" style={{ borderSpacing: 0 }}>
-                    <thead>
-                      <tr className="divide-x divide-slate-200">
-                        <th scope="col" className="bg-slate-50 sticky top-0 border-b border-slate-200 px-3 py-3 text-sm font-semibold text-primary">
-                          Departure
-                        </th>
-                        <th scope="col" className="bg-slate-50 sticky top-0 border-b border-slate-200 px-3 py-3 text-sm font-semibold text-primary">
-                          Arrival
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {timeFrom.map((_, index) =>
-                        timeFrom[index] && timeTo[index] ? (
-                          <tr key={index} className="divide-x divide-slate-200" onClick={highlightRow} ref={(el) => (rowsRef.current[index] = el)}>
-                            <td className="bg-white border-b border-slate-200 whitespace-nowrap px-3 py-2.5 text-sm text-slate-500">
-                              {addZeroToHour(timeFrom[index] as string)}
-                            </td>
-                            <td className="bg-white border-b border-slate-200 whitespace-nowrap px-3 py-2.5 text-sm text-slate-500">
-                              {addZeroToHour(timeTo[index] as string)}
-                            </td>
-                          </tr>
-                        ) : null
-                      )}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </>
-          ) : (
-            <div className="py-20 text-center space-y-1">
-              <div className="font-semibold">No data 🤷</div>
-              <p className="text-tertiary text-sm">
-                Please select your <span className="text-secondary font-medium">From</span> and <span className="text-secondary font-medium">To</span>{' '}
-                destinations
-              </p>
+        <div className="space-y-6 mt-4">
+          {/* Select route */}
+          <section>
+            <RouteTitle>Select route 🛤️</RouteTitle>
+            <div className="flex items-center space-x-4">
+              <RouteButton onClick={() => setDestination('A')} active={destination === 'A'}>
+                Batu Caves - Pulau Sebang
+              </RouteButton>
+              <RouteButton onClick={() => setDestination('B')} active={destination === 'B'}>
+                Tg Malim - Klang
+              </RouteButton>
             </div>
-          )}
-        </section>
+          </section>
+
+          {/* Select weekday or weekend */}
+          <section>
+            <RouteTitle>Select week type 📅</RouteTitle>
+            <div className="flex items-center space-x-4">
+              <RouteButton className="py-2.5" onClick={() => setWeek('weekday')} active={week === 'weekday'}>
+                Weekday
+              </RouteButton>
+              <RouteButton className="py-2.5" onClick={() => setWeek('weekend')} active={week === 'weekend'}>
+                Weekend
+              </RouteButton>
+            </div>
+          </section>
+
+          {/* Select destination */}
+          <section>
+            <RouteTitle>Choose destination 🎯</RouteTitle>
+            <div className="flex flex-col">
+              <DestinationInput
+                name="from"
+                placeholder="From"
+                options={sortedOptions}
+                value={from}
+                disabledOption={to}
+                onChange={(e) => setFrom(e.target.value as DestinationsName)}
+              />
+
+              <div className="my-2 text-xs text-tertiary text-center">towards ⬇️</div>
+
+              <DestinationInput
+                name="to"
+                placeholder="To"
+                options={sortedOptions}
+                value={to}
+                disabledOption={from}
+                onChange={(e) => setTo(e.target.value as DestinationsName)}
+              />
+            </div>
+          </section>
+
+          {/* Show route data */}
+          <section>
+            <RouteTitle>Route data 📊</RouteTitle>
+
+            {timeFrom && timeTo ? (
+              <>
+                {/* Last updated */}
+                <LastUpdated>{table.lastUpdated}</LastUpdated>
+
+                {/* Data table */}
+                <div className="shadow ring-1 ring-slate-200 rounded overflow-hidden">
+                  <div className="max-h-[500px] overflow-y-auto scrollbar-hide">
+                    <table className="border-separate table-fixed w-full text-center table-departure-arrival" style={{ borderSpacing: 0 }}>
+                      <thead>
+                        <tr className="divide-x divide-slate-200">
+                          <th scope="col" className="bg-slate-50 sticky top-0 border-b border-slate-200 px-3 py-3 text-sm font-semibold text-primary">
+                            Departure
+                          </th>
+                          <th scope="col" className="bg-slate-50 sticky top-0 border-b border-slate-200 px-3 py-3 text-sm font-semibold text-primary">
+                            Arrival
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {timeFrom.map((_, index) =>
+                          timeFrom[index] && timeTo[index] ? (
+                            <tr key={index} className="divide-x divide-slate-200" onClick={highlightRow} ref={(el) => (rowsRef.current[index] = el)}>
+                              <td className="bg-white border-b border-slate-200 whitespace-nowrap px-3 py-2.5 text-sm text-slate-500">
+                                {addZeroToHour(timeFrom[index] as string)}
+                              </td>
+                              <td className="bg-white border-b border-slate-200 whitespace-nowrap px-3 py-2.5 text-sm text-slate-500">
+                                {addZeroToHour(timeTo[index] as string)}
+                              </td>
+                            </tr>
+                          ) : null
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="py-20 text-center space-y-1">
+                <div className="font-semibold">No data 🤷</div>
+                <p className="text-tertiary text-sm">
+                  Please select your <span className="text-secondary font-medium">From</span> and{' '}
+                  <span className="text-secondary font-medium">To</span> destinations
+                </p>
+              </div>
+            )}
+          </section>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

@@ -3,12 +3,15 @@ import { useTableContext } from 'context/table'
 import type { WeekType } from 'types'
 import Table from 'components/table'
 import LastUpdated from 'components/last-updated'
+import { Head } from 'components/head'
 
 export default function TableIndex() {
   const { table, selectedTable } = useTableContext()
 
   return (
     <>
+      <Head title="Table | KTM Schedule" description="See KTM Schedule on table view." />
+
       <div>
         <p className="text-xs text-tertiary">Train to</p>
         <h2 className="text-3xl font-bold text-primary flex items-center space-x-3">
