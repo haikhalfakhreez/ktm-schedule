@@ -1,9 +1,9 @@
 import { clsx } from 'clsx'
 import { useTableContext } from 'context/table'
 import type { WeekType } from 'types'
-import Table from 'components/table'
-import LastUpdated from 'components/last-updated'
-import { Head } from 'components/head'
+import Table from 'app/table/Table'
+import LastUpdated from 'components/LastUpdated'
+import { Head } from 'app/head'
 
 export default function TableIndex() {
   const { table, selectedTable } = useTableContext()

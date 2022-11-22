@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 import type { TableDataKey, JsonData } from 'types'
 
@@ -122,7 +124,7 @@ type TableContextType = {
   selectedTable: JsonData
 }
 
-const Context = React.createContext<TableContextType>({
+const TableContext = React.createContext<TableContextType>({
   table: tableOptions[0],
   setTable: () => undefined,
   selectedTable: TABLE_DATA['bc-wd' as TableDataKey],
@@ -132,9 +134,9 @@ export function TableProvider({ children }: { children: React.ReactNode }) {
   const [table, setTable] = React.useState<TableOption>(tableOptions[0])
   const selectedTable: JsonData = TABLE_DATA[table.value as TableDataKey]
 
-  return <Context.Provider value={{ table, setTable, selectedTable }}>{children}</Context.Provider>
+  return <TableContext.Provider value={{ table, setTable, selectedTable }}>{children}</TableContext.Provider>
 }
 
 export function useTableContext() {
-  return React.useContext(Context)
+  return React.useContext(TableContext)
 }
