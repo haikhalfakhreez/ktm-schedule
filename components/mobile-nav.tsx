@@ -51,6 +51,7 @@ function MobileBreadcrumbs() {
         <Popover as="li" className="relative flex items-center">
           <Popover.Button>
             <ChevronRightIcon className="flex-shrink-0 h-5 w-5 text-tertiary" aria-hidden="true" />
+            <span className="sr-only">Select page</span>
           </Popover.Button>
 
           <Popover.Panel

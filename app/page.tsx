@@ -48,7 +48,7 @@ function IndexButton({ children, href }: { children: React.ReactNode; href: stri
   return (
     <Link
       href={href}
-      className="flex-1 text-center w-full md:w-auto hover:text-highlight p-8 border border-slate-200 rounded-md focus:ring-2 focus:ring-slate-200 focus:ring-opacity-70 hover:bg-indigo-50 flex items-center justify-center flex-col space-y-1"
+      className="flex-1 text-center w-full md:w-auto hover:text-highlight p-8 border border-slate-200 rounded-md focus:ring-2 focus:border-highlight focus:ring-highlight/50 hover:bg-indigo-50 flex items-center justify-center flex-col space-y-1"
     >
       {children}
     </Link>

@@ -25,7 +25,7 @@ export function SelectTable() {
       <select
         id="table"
         name="table"
-        className="block w-full pl-2 md:pl-3 pr-8 md:pr-10 py-2 text-xs md:text-sm border-slate-300 focus:outline-none focus:ring-highlight focus:border-highlight rounded-md"
+        className="block w-full pl-2 md:pl-3 pr-8 md:pr-10 py-2 text-xs md:text-sm border-slate-300 focus:outline-none focus:ring-2 focus:ring-highlight/50 focus:border-highlight rounded-md"
         value={table ?? defaultTableOption.value}
         onChange={handleChange}
       >

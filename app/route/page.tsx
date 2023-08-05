@@ -16,6 +16,7 @@ import klangWdData from '@/data/klang-wd.json'
 import klangWkData from '@/data/klang-wk.json'
 import tgMalimWdData from '@/data/tg-malim-wd.json'
 import tgMalimWkData from '@/data/tg-malim-wk.json'
+import { ArrowsUpDownIcon } from '@heroicons/react/24/outline'
 
 type TimeFromTo = (string | null)[] | null
 
@@ -113,6 +114,11 @@ export default function RoutePage() {
     }
   }, [timeFrom, timeTo])
 
+  const switchDestination = React.useCallback(() => {
+    setFrom(to)
+    setTo(from)
+  }, [from, to])
+
   return (
     <>
       <div className="max-w-screen-sm mx-auto">
@@ -136,18 +142,10 @@ export default function RoutePage() {
           <section>
             <RouteTitle>Select week type 📅</RouteTitle>
             <div className="flex items-stretch space-x-4">
-              <RouteButton
-                className="py-2.5"
-                onClick={() => setWeek('weekday')}
-                active={week === 'weekday'}
-              >
+              <RouteButton onClick={() => setWeek('weekday')} active={week === 'weekday'}>
                 Weekday
               </RouteButton>
-              <RouteButton
-                className="py-2.5"
-                onClick={() => setWeek('weekend')}
-                active={week === 'weekend'}
-              >
+              <RouteButton onClick={() => setWeek('weekend')} active={week === 'weekend'}>
                 Weekend
               </RouteButton>
             </div>
@@ -166,7 +164,10 @@ export default function RoutePage() {
                 onChange={(e) => setFrom(e.target.value as DestinationsName)}
               />
 
-              <div className="my-2 text-xs text-tertiary text-center">towards ⬇️</div>
+              <div className="flex items-center justify-center space-x-4 py-3">
+                <div className="my-2 text-xs text-tertiary text-center">towards ⬇️</div>
+                <SwitchButton onClick={switchDestination} disabled={!from || !to} />
+              </div>
 
               <DestinationInput
                 name="to"
@@ -285,10 +286,10 @@ function RouteButton({
   return (
     <button
       className={cn(
-        'flex-1 rounded-md border font-semibold text-sm text-secondary px-8 py-4 focus:ring-2 focus:ring-opacity-70',
+        'flex-1 rounded-md border font-semibold text-sm text-secondary px-8 py-4 focus:ring-2',
         active
-          ? 'bg-indigo-50 hover:bg-indigo-100 border-highlight focus:ring-indigo-200'
-          : 'bg-white hover:bg-slate-100 border-slate-200 focus:ring-slate-200',
+          ? 'bg-indigo-50 hover:bg-indigo-100 border-highlight focus:ring-highlight/50'
+          : 'bg-white hover:bg-slate-100 border-slate-200 focus:ring-slate-200/70',
         className
       )}
       {...buttonProps}
@@ -319,7 +320,7 @@ function DestinationInput({
     <select
       name={name}
       id={name}
-      className="flex-1 shadow-sm focus:ring-highlight focus:border-highlight block w-full text-sm border border-slate-200 rounded-md pl-3 pr-10 py-2 focus:outline-none"
+      className="flex-1 shadow-sm focus:ring-2 focus:ring-highlight/50 focus:border-highlight block w-full text-sm border border-slate-200 rounded-md pl-4 pr-10 py-3 focus:outline-none"
       placeholder={placeholder}
       {...selectProps}
     >
@@ -332,5 +333,19 @@ function DestinationInput({
         </option>
       ))}
     </select>
+  )
+}
+
+function SwitchButton({ ...props }: React.ComponentPropsWithoutRef<'button'>) {
+  return (
+    <button
+      type="button"
+      className="border border-slate-200 p-1.5 rounded-md focus:ring-2 focus:ring-highlight/50 focus:border-highlight bg-white disabled:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed"
+      title="Switch destination"
+      {...props}
+    >
+      <ArrowsUpDownIcon className="h-3.5 w-3.5" />
+      <span className="sr-only">Switch destination</span>
+    </button>
   )
 }
