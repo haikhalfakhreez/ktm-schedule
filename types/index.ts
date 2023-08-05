@@ -1,4 +1,4 @@
-import { DestinationsName } from 'types'
+import { DestinationsName } from '.'
 
 export * from './destination'
 
@@ -14,4 +14,12 @@ export type JsonData = {
 }
 
 export type WeekType = 'weekday' | 'weekend'
-export type TableDataKey = 'bc-wd' | 'bc-wk' | 'ps-wd' | 'ps-wk' | 'kl-wd' | 'kl-wk' | 'tm-wd' | 'tm-wk'
+export type TableDataKey =
+  | 'bc-wd'
+  | 'bc-wk'
+  | 'ps-wd'
+  | 'ps-wk'
+  | 'kl-wd'
+  | 'kl-wk'
+  | 'tm-wd'
+  | 'tm-wk'

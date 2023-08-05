@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="https://ktm-schedule.vercel.app/ktm-schedule.png" alt="KTM Schedule">
+  <img src="https://ktm-schedule.vercel.app/opengraph-image.png" alt="KTM Komuter Timetable">
 </p>
 
 <p align="center">
-  KTM Berhad Malaysia train schedule. In tables and routes view.
+  KTM Komuter Malaysia train timetable. In tables and routes view.
 <p>
 
 <p align="center">
@@ -12,39 +12,25 @@
 
 ## About KTM Schedule
 
-Last updated: <strong>22 August 2022</strong>
+Last updated: <strong>July 2023</strong>
 
 All data is from [KTM Train Schedule](https://www.ktmb.com.my/traintime.html) up to the above last updated date.
-This project is heavily inspired by [desmondyeoh's ktmTime](https://github.com/desmondyeoh/ktmTime) GitHub repo.
 
 ## How data is extracted
 
 #### Extracting
 
-1. Download train times in PDF format from https://www.ktmb.com.my/traintime.html.
-2. Convert all the PDF files into .docx format.
-3. Inside each .docx file, there will be 2 tables. Copy each individual table into its own Google Sheet tab.
-4. From Google Sheet, download the file for each tab in .csv format.
+<sub>All conversions are made using Python! ❤️</sub>
 
-#### Converting .csv to .json
+1. Download train times in PDF format from [https://www.ktmb.com.my/traintime.html](https://www.ktmb.com.my/traintime.html).
+2. Convert all the PDF files to CSV format using [Camelot](https://camelot-py.readthedocs.io/en/master/).
+3. Manually check and correct the data in the CSV files, ensuring there are no trailing commas, and each train time is placed in the correct column.
+4. Convert all the CSV files to JSON format using [Pandas](https://pypi.org/project/pandas/).
 
-<em>Note: need to use Python for this step.</em>
+## Update (July 2023)
 
-1. Use [Pandas](https://pypi.org/project/pandas/) to parse all .csv files to .json format.
-
-```python
-import pandas as pd
-
-name = 'your-file-name'
-df = pd.read_csv(r'./' + name + '.csv')
-df.to_json(r'./' + name + '.json')
-```
-
-2. Copy all the .json files into your project.
-
-## Tech stack used
-
-- Next JS
-- Python
-- TypeScript
-- Tailwind
+- Updated all train times to the latest schedule **(last updated: July 2023)**.
+- Migrated the old Pages router to the new App router. [Read more](https://nextjs.org/docs/app).
+- Implemented URL parameters to store state, replacing the use of React context.
+- Integrated [Camelot](https://camelot-py.readthedocs.io/en/master/) to directly convert PDF to CSV, eliminating the need for manual conversion to .docx.
+- Added page descriptions, improved SEO, and fixed bugs.

@@ -1,10 +1,13 @@
-import * as React from 'react'
-import { twMerge } from 'tailwind-merge'
-import type { JsonData } from 'types'
+'use client'
 
-export default function Table({ jsonData }: { jsonData: JsonData }) {
+import * as React from 'react'
+import { cn } from '@/lib/utils'
+import { TABLE_DATA, TableOption } from '@/lib/table'
+
+export function Table({ table }: { table: TableOption }) {
   const rowsRef = React.useRef<Array<HTMLDivElement | null>>([])
-  const { train, data } = jsonData
+
+  const { train, data } = TABLE_DATA[table.value]
 
   const trainKeysLength = Object.keys(train).length
   const dataKeysLength = Object.keys(data).length
@@ -40,11 +43,19 @@ export default function Table({ jsonData }: { jsonData: JsonData }) {
           <tbody>
             {Object.entries(train).map((_, _index) => (
               <tr key={_index} onClick={highlightRow} ref={(el) => (rowsRef.current[_index] = el)}>
-                <Td sticky className="bg-slate-100 text-left" showBorderBottom={_index !== trainKeysLength - 1}>
+                <Td
+                  sticky
+                  className="bg-slate-100 text-left"
+                  showBorderBottom={_index !== trainKeysLength - 1}
+                >
                   {train[_index]}
                 </Td>
                 {Object.entries(data).map(([key, value], index) => (
-                  <Td key={index} showBorderRight={index !== dataKeysLength - 1} showBorderBottom={_index !== trainKeysLength - 1}>
+                  <Td
+                    key={index}
+                    showBorderRight={index !== dataKeysLength - 1}
+                    showBorderBottom={_index !== trainKeysLength - 1}
+                  >
                     {value[_index]}
                   </Td>
                 ))}
@@ -70,11 +81,17 @@ type TableProps = {
   className?: string
 }
 
-function Td({ sticky = false, children, showBorderRight = true, showBorderBottom = true, className }: TableProps) {
+function Td({
+  sticky = false,
+  children,
+  showBorderRight = true,
+  showBorderBottom = true,
+  className,
+}: TableProps) {
   return (
     <td
       scope="col"
-      className={twMerge(
+      className={cn(
         'whitespace-nowrap px-2 md:px-4 py-2 text-center text-sm text-tertiary border-slate-200',
         sticky ? 'sticky left-0 z-10' : '',
         showBorderRight ? 'border-r' : '',
@@ -87,11 +104,17 @@ function Td({ sticky = false, children, showBorderRight = true, showBorderBottom
   )
 }
 
-function Th({ sticky = false, children, showBorderRight = true, showBorderBottom = true, className }: TableProps) {
+function Th({
+  sticky = false,
+  children,
+  showBorderRight = true,
+  showBorderBottom = true,
+  className,
+}: TableProps) {
   return (
     <th
       scope="col"
-      className={twMerge(
+      className={cn(
         'bg-slate-50 px-2 md:px-4 py-3.5 text-center text-sm font-semibold text-primary border-slate-200',
         sticky ? 'sticky left-0 z-10' : '',
         showBorderRight ? 'border-r' : '',

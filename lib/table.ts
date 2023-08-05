@@ -1,14 +1,13 @@
-import * as React from 'react'
-import type { TableDataKey, JsonData } from 'types'
+import type { TableDataKey, JsonData } from '@/types'
 
-import batuCavesWdData from 'lib/batu-caves-wd.json'
-import batuCavesWkData from 'lib/batu-caves-wk.json'
-import pulauSebangWdData from 'lib/pulau-sebang-wd.json'
-import pulauSebangWkData from 'lib/pulau-sebang-wk.json'
-import klangWdData from 'lib/klang-wd.json'
-import klangWkData from 'lib/klang-wk.json'
-import tgMalimWdData from 'lib/tg-malim-wd.json'
-import tgMalimWkData from 'lib/tg-malim-wk.json'
+import batuCavesWdData from '@/data/batu-caves-wd.json'
+import batuCavesWkData from '@/data/batu-caves-wk.json'
+import pulauSebangWdData from '@/data/pulau-sebang-wd.json'
+import pulauSebangWkData from '@/data/pulau-sebang-wk.json'
+import klangWdData from '@/data/klang-wd.json'
+import klangWkData from '@/data/klang-wk.json'
+import tgMalimWdData from '@/data/tg-malim-wd.json'
+import tgMalimWkData from '@/data/tg-malim-wk.json'
 
 export type TableOption = {
   destination: 'A' | 'B'
@@ -22,10 +21,10 @@ export type TableOption = {
 const weekdayIcon: string = '(Weekday)'
 const weekendIcon: string = '(Weekend)'
 
-const bc_psWeekdayLastUpdated: string = '25 July 2022'
-const bc_psWeekendLastUpdated: string = '30 July 2022'
-const kl_tmWeekdayLastUpdated: string = '15 June 2022'
-const kl_tmWeekendLastUpdated: string = '18 June 2022'
+const bc_psWeekdayLastUpdated: string = '10 July 2023'
+const bc_psWeekendLastUpdated: string = '8 July 2023'
+const kl_tmWeekdayLastUpdated: string = '12 July 2023'
+const kl_tmWeekendLastUpdated: string = '8 July 2023'
 
 export const tableOptions: TableOption[] = [
   {
@@ -94,6 +93,8 @@ export const tableOptions: TableOption[] = [
   },
 ]
 
+export const defaultTableOption = tableOptions[0]
+
 /**
  * Get route JSON data based on selected table.value
  */
@@ -110,31 +111,4 @@ export const TABLE_DATA: TableData = {
   'kl-wk': klangWkData as JsonData,
   'tm-wd': tgMalimWdData as JsonData,
   'tm-wk': tgMalimWkData as JsonData,
-}
-
-/**
- * Create React context for table
- * Default value: batu-caves (weekday)
- */
-type TableContextType = {
-  table: TableOption
-  setTable: (newValue: TableOption) => void
-  selectedTable: JsonData
-}
-
-const Context = React.createContext<TableContextType>({
-  table: tableOptions[0],
-  setTable: () => undefined,
-  selectedTable: TABLE_DATA['bc-wd' as TableDataKey],
-})
-
-export function TableProvider({ children }: { children: React.ReactNode }) {
-  const [table, setTable] = React.useState<TableOption>(tableOptions[0])
-  const selectedTable: JsonData = TABLE_DATA[table.value as TableDataKey]
-
-  return <Context.Provider value={{ table, setTable, selectedTable }}>{children}</Context.Provider>
-}
-
-export function useTableContext() {
-  return React.useContext(Context)
 }

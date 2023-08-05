@@ -6,7 +6,7 @@
   a,
   area,
   button,
-  [role="button"],
+  [role='button'],
   input,
   label,
   select,
@@ -32,7 +32,8 @@
   @apply !border-b-0;
 }
 
-.table-highlight-row td, .route-highlight-row td {
+.table-highlight-row td,
+.route-highlight-row td {
   @apply !bg-indigo-300/10 !text-primary;
 }
 
