@@ -28,6 +28,7 @@ All data is sourced from the official [KTM Komuter Timetable website](https://ww
 ## Update (July 2023)
 
 - Updated all train times to the latest schedule **(last updated: July 2023)**.
+- New feature added: a switch button to toggle between "to" and "from" stations on Route page.
 - Migrated the old Pages router to the new App router. [Learn more](https://nextjs.org/docs/app).
 - Implemented URL parameters to store state, replacing the use of React context.
 - Integrated [Camelot](https://camelot-py.readthedocs.io/en/master/) to directly convert PDF to CSV, eliminating the need for manual conversion to .docx.
