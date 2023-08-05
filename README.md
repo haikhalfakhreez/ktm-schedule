@@ -32,4 +32,4 @@ All data is sourced from the official [KTM Komuter Timetable website](https://ww
 - Migrated the old Pages router to the new App router. [Learn more](https://nextjs.org/docs/app).
 - Implemented URL parameters to store state, replacing the use of React context.
 - Integrated [Camelot](https://camelot-py.readthedocs.io/en/master/) to directly convert PDF to CSV, eliminating the need for manual conversion to .docx.
-- Added page descriptions, improved SEO, and fixed bugs.
+- Added page descriptions, improved SEO, and UI updates.
