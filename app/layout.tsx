@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
 import { siteConfig } from '@/lib/site-config'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
@@ -25,6 +26,7 @@ export const metadata: Metadata = {
     'Jadual KTM',
   ],
   authors: siteConfig.authors,
+  metadataBase: new URL(siteConfig.url),
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -36,6 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </SectionLayout>
         <Footer />
+        <Analytics />
       </body>
     </html>
   )
