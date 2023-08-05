@@ -14,11 +14,9 @@
 
 Last updated: <strong>July 2023</strong>
 
-All data is from [KTM Train Schedule](https://www.ktmb.com.my/traintime.html) up to the above last updated date.
+All data is sourced from the official [KTM Komuter Timetable website](https://www.ktmb.com.my/traintime.html) up to the date of the last update mentioned above.
 
 ## How data is extracted
-
-#### Extracting
 
 <sub>All conversions are made using Python! ❤️</sub>
 
@@ -30,7 +28,7 @@ All data is from [KTM Train Schedule](https://www.ktmb.com.my/traintime.html) up
 ## Update (July 2023)
 
 - Updated all train times to the latest schedule **(last updated: July 2023)**.
-- Migrated the old Pages router to the new App router. [Read more](https://nextjs.org/docs/app).
+- Migrated the old Pages router to the new App router. [Learn more](https://nextjs.org/docs/app).
 - Implemented URL parameters to store state, replacing the use of React context.
 - Integrated [Camelot](https://camelot-py.readthedocs.io/en/master/) to directly convert PDF to CSV, eliminating the need for manual conversion to .docx.
 - Added page descriptions, improved SEO, and fixed bugs.
