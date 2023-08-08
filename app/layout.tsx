@@ -27,6 +27,9 @@ export const metadata: Metadata = {
   ],
   authors: siteConfig.authors,
   metadataBase: new URL(siteConfig.url),
+  other: {
+    'google-site-verification': 'H0-FqHieLkNr1iGQK-n0hi9GS4-1FbWhWGoPDoMoqcc',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
