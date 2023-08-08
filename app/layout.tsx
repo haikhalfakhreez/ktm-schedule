@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   authors: siteConfig.authors,
   metadataBase: new URL(siteConfig.url),
   other: {
-    'google-site-verification': 'H0-FqHieLkNr1iGQK-n0hi9GS4-1FbWhWGoPDoMoqcc',
+    'google-site-verification': 'NsL3ml4zOANR3WKPQVnbo-W6Dhwtm7KYz91zSdI7Z9I',
   },
 }
 
