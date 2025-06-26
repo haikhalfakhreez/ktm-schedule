@@ -1,37 +1,44 @@
 import pandas as pd
-import numpy as np
 import json
+import os
 
-# Define all name of files
-# name = 'batu-caves-wk'
-# name = 'pulau-sebang-wk'
-# name = 'klang-wk'
-name = 'tg-malim-wk'
+csv_folder = './csv'
+output_folder = '../data'
 
-print('Start converting csv to json for ' + name)
+# Make sure the output folder exists
+os.makedirs(output_folder, exist_ok=True)
 
-# Read the CSV file
-df = pd.read_csv(r'./output/' + name + '.csv')
+# List all CSV files in the folder
+for filename in os.listdir(csv_folder):
+    if filename.endswith('.csv'):
+        name = os.path.splitext(filename)[0]
+        print(f'Start converting csv to json for {name}')
 
-# Save 'train' data to a separate variable and remove from DataFrame
-train_data = df['train'].to_dict()
-df = df.drop('train', axis=1)
+        # Read CSV file
+        df = pd.read_csv(os.path.join(csv_folder, filename))
 
-# Replace 'NaN' with None
-df = df.where(pd.notnull(df), None)
+        # Save 'train' data to a separate variable and remove from DataFrame
+        train_data = df['train'].to_dict()
+        df = df.drop('train', axis=1)
 
-# Convert DataFrame to dict and wrap into 'data' key
-data_dict = df.to_dict(orient='list')
+        # Replace 'NaN' with None
+        df = df.where(pd.notnull(df), None)
 
-# Convert list values to dictionaries with index keys
-for key, values in data_dict.items():
-  data_dict[key] = {str(i): v for i, v in enumerate(values)}
+        # Convert DataFrame to dict and wrap into 'data' key
+        data_dict = df.to_dict(orient='list')
 
-# Combine 'train' and 'data' into one dict
-output_dict = {**{"train": train_data}, **{"data": data_dict}}
+        # Convert list values to dictionaries with index keys
+        for key, values in data_dict.items():
+            data_dict[key] = {str(i): v for i, v in enumerate(values)}
 
-# Save the dictionary to a JSON file
-with open(r'../data/' + name + '.json', 'w') as f:
-  json.dump(output_dict, f)
+        # Combine 'train' and 'data' into one dict
+        output_dict = {"train": train_data, "data": data_dict}
+
+        # Save to JSON file with the same base name
+        output_path = os.path.join(output_folder, f'{name}.json')
+        with open(output_path, 'w') as f:
+            json.dump(output_dict, f)
+
+        print(f'Finished converting {name}!')
 
 print('All done!')
