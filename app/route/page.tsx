@@ -18,12 +18,15 @@ import tgMalimWdData from '@/data/tg-malim-wd.json'
 import tgMalimWkData from '@/data/tg-malim-wk.json'
 import { ArrowsUpDownIcon } from '@heroicons/react/24/outline'
 
+import type { JSX } from 'react'
+
 type TimeFromTo = (string | null)[] | null
 
 export default function RoutePage() {
   const searchParams = useSearchParams()
   const table =
-    tableOptions.find((i) => i.value === searchParams.get('table')) || defaultTableOption
+    tableOptions.find((i) => i.value === searchParams.get('table')) ||
+    defaultTableOption
 
   const [from, setFrom] = React.useState<DestinationsName | ''>('')
   const [to, setTo] = React.useState<DestinationsName | ''>('')
@@ -31,7 +34,9 @@ export default function RoutePage() {
   const [timeTo, setTimeTo] = React.useState<TimeFromTo>(null)
 
   const [destination, setDestination] = React.useState<'A' | 'B'>('A')
-  const [selectedDestination, setSelectedDestination] = React.useState<string[] | []>([])
+  const [selectedDestination, setSelectedDestination] = React.useState<
+    string[] | []
+  >([])
   const [route, setRoute] = React.useState<JsonData | null>(null)
   const [week, setWeek] = React.useState<WeekType>('weekday')
 
@@ -48,7 +53,9 @@ export default function RoutePage() {
 
   React.useEffect(() => {
     setSelectedDestination(destination === 'A' ? destinationsA : destinationsB)
-    setSortedOptions([...selectedDestination].sort((a, b) => a.localeCompare(b)))
+    setSortedOptions(
+      [...selectedDestination].sort((a, b) => a.localeCompare(b))
+    )
 
     reset()
   }, [destination, selectedDestination])
@@ -60,16 +67,26 @@ export default function RoutePage() {
 
   React.useEffect(() => {
     if (fromIndex != null && toIndex != null) {
-      const batuCavesData = week === 'weekday' ? batuCavesWdData : batuCavesWkData
-      const pulauSebangData = week === 'weekday' ? pulauSebangWdData : pulauSebangWkData
+      const batuCavesData =
+        week === 'weekday' ? batuCavesWdData : batuCavesWkData
+      const pulauSebangData =
+        week === 'weekday' ? pulauSebangWdData : pulauSebangWkData
       const klangData = week === 'weekday' ? klangWdData : klangWkData
       const tgMalimData = week === 'weekday' ? tgMalimWdData : tgMalimWkData
 
       // Select the route based on the from and to
       if (fromIndex > toIndex) {
-        setRoute(destination === 'A' ? (pulauSebangData as JsonData) : (tgMalimData as JsonData))
+        setRoute(
+          destination === 'A'
+            ? (pulauSebangData as JsonData)
+            : (tgMalimData as JsonData)
+        )
       } else {
-        setRoute(destination === 'A' ? (batuCavesData as JsonData) : (klangData as JsonData))
+        setRoute(
+          destination === 'A'
+            ? (batuCavesData as JsonData)
+            : (klangData as JsonData)
+        )
       }
     }
   }, [fromIndex, toIndex, destination, week])
@@ -121,7 +138,7 @@ export default function RoutePage() {
 
   return (
     <>
-      <div className="max-w-screen-sm mx-auto">
+      <div className="max-w-(--breakpoint-sm) mx-auto">
         <h2 className="text-3xl font-bold text-primary">Route</h2>
 
         <div className="space-y-6 mt-4">
@@ -129,10 +146,16 @@ export default function RoutePage() {
           <section>
             <RouteTitle>Select route 🛤️</RouteTitle>
             <div className="flex items-stretch space-x-4">
-              <RouteButton onClick={() => setDestination('A')} active={destination === 'A'}>
+              <RouteButton
+                onClick={() => setDestination('A')}
+                active={destination === 'A'}
+              >
                 Batu Caves - Pulau Sebang
               </RouteButton>
-              <RouteButton onClick={() => setDestination('B')} active={destination === 'B'}>
+              <RouteButton
+                onClick={() => setDestination('B')}
+                active={destination === 'B'}
+              >
                 Tg Malim - Klang
               </RouteButton>
             </div>
@@ -142,10 +165,16 @@ export default function RoutePage() {
           <section>
             <RouteTitle>Select week type 📅</RouteTitle>
             <div className="flex items-stretch space-x-4">
-              <RouteButton onClick={() => setWeek('weekday')} active={week === 'weekday'}>
+              <RouteButton
+                onClick={() => setWeek('weekday')}
+                active={week === 'weekday'}
+              >
                 Weekday
               </RouteButton>
-              <RouteButton onClick={() => setWeek('weekend')} active={week === 'weekend'}>
+              <RouteButton
+                onClick={() => setWeek('weekend')}
+                active={week === 'weekend'}
+              >
                 Weekend
               </RouteButton>
             </div>
@@ -165,8 +194,13 @@ export default function RoutePage() {
               />
 
               <div className="flex items-center justify-center space-x-4 py-3">
-                <div className="my-2 text-xs text-tertiary text-center">towards ⬇️</div>
-                <SwitchButton onClick={switchDestination} disabled={!from || !to} />
+                <div className="my-2 text-xs text-tertiary text-center">
+                  towards ⬇️
+                </div>
+                <SwitchButton
+                  onClick={switchDestination}
+                  disabled={!from || !to}
+                />
               </div>
 
               <DestinationInput
@@ -219,7 +253,9 @@ export default function RoutePage() {
                               key={index}
                               className="divide-x divide-slate-200"
                               onClick={highlightRow}
-                              ref={(el) => (rowsRef.current[index] = el)}
+                              ref={(el) => {
+                                rowsRef.current[index] = el
+                              }}
                             >
                               <td className="bg-white border-b border-slate-200 whitespace-nowrap px-3 py-2.5 text-sm text-slate-500">
                                 {addZeroToHour(timeFrom[index] as string)}
@@ -239,8 +275,10 @@ export default function RoutePage() {
               <div className="pb-20 pt-28 text-center space-y-1">
                 <div className="font-semibold">No data 🤷🏻‍♀️</div>
                 <p className="text-tertiary text-sm">
-                  Please select your <span className="text-secondary font-medium">From</span> and{' '}
-                  <span className="text-secondary font-medium">To</span> destinations
+                  Please select your{' '}
+                  <span className="text-secondary font-medium">From</span> and{' '}
+                  <span className="text-secondary font-medium">To</span>{' '}
+                  destinations
                 </p>
               </div>
             )}
@@ -260,7 +298,10 @@ type RouteTitleProps = {
   children: React.ReactNode
 }
 
-function RouteTitle({ children, ...titleProps }: RouteTitleProps & JSX.IntrinsicElements['h3']) {
+function RouteTitle({
+  children,
+  ...titleProps
+}: RouteTitleProps & JSX.IntrinsicElements['h3']) {
   return (
     <h3 className="text-sm font-semibold text-tertiary mb-2" {...titleProps}>
       {children}
@@ -321,7 +362,6 @@ function DestinationInput({
       name={name}
       id={name}
       className="flex-1 shadow-sm focus:ring-2 focus:ring-highlight/50 focus:border-highlight block w-full text-sm border border-slate-200 rounded-md pl-4 pr-10 py-3 focus:outline-none"
-      placeholder={placeholder}
       {...selectProps}
     >
       <option value="" disabled>

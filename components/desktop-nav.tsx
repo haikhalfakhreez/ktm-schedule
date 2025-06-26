@@ -1,7 +1,8 @@
 'use client'
-
 import { useSearchParams } from 'next/navigation'
 import { NavList } from '@/components/navbar'
+
+import type { JSX } from 'react'
 
 export function DesktopNav({ className }: JSX.IntrinsicElements['nav']) {
   const searchParams = useSearchParams()
