@@ -1,7 +1,8 @@
 'use client'
-
 import { useSearchParams } from 'next/navigation'
 import { NavList } from '@/components/navbar'
+
+import type { JSX } from 'react'
 
 export function DesktopNav({ className }: JSX.IntrinsicElements['nav']) {
   const searchParams = useSearchParams()
@@ -11,6 +12,19 @@ export function DesktopNav({ className }: JSX.IntrinsicElements['nav']) {
       <ul className="flex items-center space-x-6">
         <NavList href={`/route?${searchParams.toString()}`}>Route View</NavList>
         <NavList href={`/table?${searchParams.toString()}`}>Table View</NavList>
+      </ul>
+    </nav>
+  )
+}
+
+export function DesktopNavSkeleton({
+  className,
+}: JSX.IntrinsicElements['nav']) {
+  return (
+    <nav className={className}>
+      <ul className="flex items-center space-x-6">
+        <NavList href={`/route}`}>Route View</NavList>
+        <NavList href={`/table}`}>Table View</NavList>
       </ul>
     </nav>
   )

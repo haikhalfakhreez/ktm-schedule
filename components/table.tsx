@@ -27,7 +27,10 @@ export function Table({ table }: { table: TableOption }) {
   return (
     <div className="overflow-hidden shadow ring-1 ring-slate-200 rounded">
       <div className="overflow-x-auto scrollbar-hide">
-        <table className="min-w-full border-separate" style={{ borderSpacing: 0 }}>
+        <table
+          className="min-w-full border-separate"
+          style={{ borderSpacing: 0 }}
+        >
           <thead>
             <tr>
               <Th sticky className="bg-slate-100 text-left">
@@ -42,7 +45,13 @@ export function Table({ table }: { table: TableOption }) {
           </thead>
           <tbody>
             {Object.entries(train).map((_, _index) => (
-              <tr key={_index} onClick={highlightRow} ref={(el) => (rowsRef.current[_index] = el)}>
+              <tr
+                key={_index}
+                onClick={highlightRow}
+                ref={(el) => {
+                  rowsRef.current[_index] = el
+                }}
+              >
                 <Td
                   sticky
                   className="bg-slate-100 text-left"

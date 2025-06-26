@@ -1,0 +1,3 @@
+pandas
+numpy
+camelot-py[all]

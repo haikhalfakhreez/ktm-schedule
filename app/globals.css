@@ -1,6 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@import 'tailwind-scrollbar-hide/v4';
+
+@plugin "@tailwindcss/forms";
 
 @layer base {
   a,
@@ -26,6 +27,13 @@
   input {
     @apply focus:shadow-none focus:outline-none;
   }
+}
+
+@theme {
+  --color-primary: var(--color-slate-900);
+  --color-secondary: var(--color-slate-700);
+  --color-tertiary: var(--color-slate-500);
+  --color-highlight: var(--color-indigo-500);
 }
 
 .table-departure-arrival tr:last-child td {

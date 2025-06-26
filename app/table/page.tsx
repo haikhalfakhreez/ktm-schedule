@@ -1,16 +1,21 @@
 'use client'
 
+import { use } from 'react'
 import { clsx } from 'clsx'
 import type { WeekType } from '@/types'
 import { Table } from '@/components/table'
 import { LastUpdated } from '@/components/last-updated'
-import { useSearchParams } from 'next/navigation'
 import { defaultTableOption, tableOptions } from '@/lib/table'
 
-export default function TablePage() {
-  const searchParams = useSearchParams()
+export default function TablePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ table: string | string[] | undefined }>
+}) {
+  const { table: tableParams } = use(searchParams)
+
   const table =
-    tableOptions.find((i) => i.value === searchParams.get('table')) || defaultTableOption
+    tableOptions.find((i) => i.value === tableParams) || defaultTableOption
 
   return (
     <>

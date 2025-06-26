@@ -27,7 +27,8 @@ export function Footer() {
         </a>
       </div>
       <div className="text-center text-[10px]">
-        Made with 💙 by Haikhal Fakhreez. Last updated: <strong>July 2023</strong>.
+        Made with 💙 by Haikhal Fakhreez. Last updated:{' '}
+        <strong>June 2025</strong>.
       </div>
     </footer>
   )
