@@ -21,10 +21,10 @@ export type TableOption = {
 const weekdayIcon: string = '(Weekday)'
 const weekendIcon: string = '(Weekend)'
 
-const bc_psWeekdayLastUpdated: string = '10 July 2023'
-const bc_psWeekendLastUpdated: string = '8 July 2023'
-const kl_tmWeekdayLastUpdated: string = '12 July 2023'
-const kl_tmWeekendLastUpdated: string = '8 July 2023'
+const bc_psWeekdayLastUpdated: string = '26 June 2025'
+const bc_psWeekendLastUpdated: string = '26 June 2025'
+const kl_tmWeekdayLastUpdated: string = '26 June 2025'
+const kl_tmWeekendLastUpdated: string = '26 June 2025'
 
 export const tableOptions: TableOption[] = [
   {

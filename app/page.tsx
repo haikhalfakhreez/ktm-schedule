@@ -44,7 +44,13 @@ export default function Home({}) {
   )
 }
 
-function IndexButton({ children, href }: { children: React.ReactNode; href: string }) {
+function IndexButton({
+  children,
+  href,
+}: {
+  children: React.ReactNode
+  href: string
+}) {
   return (
     <Link
       href={href}
@@ -62,10 +68,10 @@ function Announcement() {
         NEW
       </span>
       <span>
-        Update: Stay informed with the latest information! KTM data has been updated to the July
-        2023 version.{' '}
+        Update: Stay informed with the latest information! KTM data has been
+        updated to the June 2025 version.{' '}
         <a
-          href={`${siteConfig.links.github}#update-july-2023`}
+          href={`${siteConfig.links.github}#update-june-2025`}
           className="text-blue-600 hover:underline"
         >
           Read more
