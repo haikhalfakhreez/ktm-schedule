@@ -16,3 +16,16 @@ export function DesktopNav({ className }: JSX.IntrinsicElements['nav']) {
     </nav>
   )
 }
+
+export function DesktopNavSkeleton({
+  className,
+}: JSX.IntrinsicElements['nav']) {
+  return (
+    <nav className={className}>
+      <ul className="flex items-center space-x-6">
+        <NavList href={`/route}`}>Route View</NavList>
+        <NavList href={`/table}`}>Table View</NavList>
+      </ul>
+    </nav>
+  )
+}

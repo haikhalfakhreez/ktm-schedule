@@ -1,7 +1,6 @@
 'use client'
 
 import * as React from 'react'
-import { useSearchParams } from 'next/navigation'
 import type { JsonData, DestinationsName, WeekType } from '@/types'
 import { addZeroToHour, cn } from '@/lib/utils'
 import { defaultTableOption, tableOptions } from '@/lib/table'
@@ -22,11 +21,14 @@ import type { JSX } from 'react'
 
 type TimeFromTo = (string | null)[] | null
 
-export default function RoutePage() {
-  const searchParams = useSearchParams()
+export default function RoutePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ table: string | string[] | undefined }>
+}) {
+  const { table: tableParams } = React.use(searchParams)
   const table =
-    tableOptions.find((i) => i.value === searchParams.get('table')) ||
-    defaultTableOption
+    tableOptions.find((i) => i.value === tableParams) || defaultTableOption
 
   const [from, setFrom] = React.useState<DestinationsName | ''>('')
   const [to, setTo] = React.useState<DestinationsName | ''>('')
